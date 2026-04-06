@@ -558,15 +558,29 @@
       });
 
 
-      // ─── 4. Video play-on-hover ────────────────────────
-      document.querySelectorAll('video[data-hover-play]').forEach(function (video) {
-        var parent = video.closest('.group') || video.parentElement;
-        parent.addEventListener('mouseenter', function () {
-          var p = video.play();
-          if (p) p.catch(function (e) { console.warn('Video play blocked:', e); });
+// ─── 4. Video play-on-hover ──────────────────
+        document.querySelectorAll('video[data-hover-play]').forEach(function(video) {
+          var parent = video.closest('.group') || video.parentElement;
+
+          // Desktop: play on hover
+          parent.addEventListener('mouseenter', function() {
+            var p = video.play();
+            if (p) p.catch(function(e) { console.warn('Video play blocked', e); });
+          });
+          parent.addEventListener('mouseleave', function() { video.pause(); });
+
+          // Mobile / touch: play when scrolled into view
+          var obs = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                video.play().catch(function(e) { console.warn('Video play blocked', e); });
+              } else {
+                video.pause();
+              }
+            });
+          }, { threshold: 0.5 });
+          obs.observe(video);
         });
-        parent.addEventListener('mouseleave', function () { video.pause(); });
-      });
 
     });
 
