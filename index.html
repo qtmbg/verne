@@ -318,9 +318,10 @@
                 <span class="font-primary italic text-[#134136]/60 text-xl mb-4">Media Pending</span>
                 <span class="font-support text-[10px] uppercase tracking-widest text-[#7A7268] max-w-full truncate px-4 opacity-70">/public/making-macro.mp4</span>
               </div>
+              <!-- ✅ FIXED: added autoplay preload="auto" -->
               <video src="/public/making-macro.mp4"
                      class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                     muted loop playsinline
+                     muted loop playsinline autoplay preload="auto"
                      onerror="this.style.display='none'"
                      data-hover-play></video>
             </div>
@@ -344,9 +345,10 @@
               <div class="w-px h-6 bg-[#134136]/20 mb-3"></div>
               <span class="font-primary italic text-[#134136]/60 text-lg mb-2">Final Piece Pending</span>
             </div>
+            <!-- ✅ FIXED: added autoplay preload="auto" -->
             <video src="/public/final-piece.mp4"
                    class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                   muted loop playsinline
+                   muted loop playsinline autoplay preload="auto"
                    onerror="this.style.display='none'"
                    data-hover-play></video>
           </div>
@@ -395,9 +397,6 @@
   <script>
   (function () {
 
-    // ── Utility: seeded pseudo-random so leaves are stable on re-render ──
-    // (We use Math.random() once on load and freeze the values, same as useMemo)
-
     // ─── 1. Parallax Leaves ──────────────────────────────
     (function initLeaves() {
       var container = document.getElementById('parallax-leaves');
@@ -405,10 +404,8 @@
       var scrollY = 0;
       var rafId = null;
 
-      // Oak leaf SVG path (identical to the React source)
       var OAK_PATH = 'M17.41 18c-.6 1.9-2.3 3.2-4.3 3.5V23.5h-2V21.5c-2-.3-3.7-1.6-4.3-3.5-.5-1.7.2-3.5 1.7-4.4-1.2-1.1-1.6-2.8-1-4.3.5-1.5 2-2.5 3.6-2.6C10.7 5.1 10.3 3.3 11 1.8c.7-1.5 2.3-2.2 3.8-1.7 1.5.5 2.2 2.1 1.7 3.6-.3.8-.9 1.4-1.6 1.8 1.5.1 2.8 1.2 3.3 2.6.5 1.4.1 3-.9 4.1 1.3.9 2 2.6 1.6 4.2-.4 1.6-2.1 2.7-3.8 2.6z';
 
-      // Build 12 leaf data objects (mirrors useMemo array)
       var leaves = Array.from({ length: 12 }).map(function (_, i) {
         return {
           left:       Math.random() * 100,
@@ -424,7 +421,6 @@
         };
       });
 
-      // Create a DOM element for each leaf
       var leafEls = leaves.map(function (l) {
         var wrap = document.createElement('div');
         wrap.className = 'leaf';
@@ -437,8 +433,8 @@
         var svg = document.createElementNS(ns, 'svg');
         svg.setAttribute('viewBox', '0 0 24 24');
         svg.setAttribute('fill', 'currentColor');
-        svg.style.width  = '6rem';   // w-24
-        svg.style.height = '6rem';   // h-24
+        svg.style.width  = '6rem';
+        svg.style.height = '6rem';
 
         var path = document.createElementNS(ns, 'path');
         path.setAttribute('d', OAK_PATH);
@@ -448,7 +444,6 @@
         return wrap;
       });
 
-      // rAF loop — mirrors the React scroll math exactly
       function tick() {
         var buffer      = 400;
         var cycleHeight = wh + buffer * 2;
@@ -468,7 +463,6 @@
         rafId = requestAnimationFrame(tick);
       }
 
-      // Passive scroll listener
       window.addEventListener('scroll', function () {
         scrollY = window.scrollY;
       }, { passive: true });
@@ -477,7 +471,6 @@
         wh = window.innerHeight;
       });
 
-      // Kick off the loop
       rafId = requestAnimationFrame(tick);
     })();
 
@@ -558,29 +551,36 @@
       });
 
 
-// ─── 4. Video play-on-hover ──────────────────
-        document.querySelectorAll('video[data-hover-play]').forEach(function(video) {
-          var parent = video.closest('.group') || video.parentElement;
+      // ─── 4. Video play-on-hover + mobile autoplay ──────
+      // ✅ FIXED: readyState check, lower threshold, canplay fallback
+      document.querySelectorAll('video[data-hover-play]').forEach(function(video) {
+        var parent = video.closest('.group') || video.parentElement;
 
-          // Desktop: play on hover
-          parent.addEventListener('mouseenter', function() {
-            var p = video.play();
-            if (p) p.catch(function(e) { console.warn('Video play blocked', e); });
-          });
-          parent.addEventListener('mouseleave', function() { video.pause(); });
+        function tryPlay() {
+          video.play().catch(function(e) { console.warn('Video play blocked', e); });
+        }
 
-          // Mobile / touch: play when scrolled into view
-          var obs = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-              if (entry.isIntersecting) {
-                video.play().catch(function(e) { console.warn('Video play blocked', e); });
+        // Desktop: play on hover
+        parent.addEventListener('mouseenter', tryPlay);
+        parent.addEventListener('mouseleave', function() { video.pause(); });
+
+        // Mobile: play when scrolled into view, wait for buffer if needed
+        var obs = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              if (video.readyState >= 3) {
+                tryPlay();
               } else {
-                video.pause();
+                video.addEventListener('canplay', tryPlay, { once: true });
               }
-            });
-          }, { threshold: 0.5 });
-          obs.observe(video);
-        });
+            } else {
+              video.pause();
+            }
+          });
+        }, { threshold: 0.3 });
+
+        obs.observe(video);
+      });
 
     });
 
