@@ -286,20 +286,21 @@
 
       <div class="space-y-12 md:space-y-16">
 
-        <!-- Step 1 – Sketch (Left) -->
+        <!-- ✅ Step 1 – Sketch (Left) — single image -->
         <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
           <div class="md:col-span-5 space-y-6">
             <div class="fade-el" data-delay="0" data-dur="1200">
-              <div class="hover-gallery cursor-pointer group tactile-frame"
-                   data-srcs='["/public/archive-sketch-1.jpg","/public/archive-sketch-2.jpg","/public/archive-sketch-3.jpg","/public/archive-sketch-4.jpg","/public/archive-sketch-5.jpg"]'
-                   data-label="5 Archival Images Requested">
-                <div class="gallery-wrap tactile-matte" style="aspect-ratio:4/5;">
-                  <div class="absolute inset-0 bg-gradient-to-br from-transparent via-[#F5FAF8]/40 to-[#134136]/5 mix-blend-overlay pointer-events-none" style="z-index:20;"></div>
+              <div class="group tactile-frame">
+                <div class="tactile-matte" style="aspect-ratio:4/5;">
+                  <div class="absolute inset-0 bg-gradient-to-br from-transparent via-[#F5FAF8]/40 to-[#134136]/5 mix-blend-overlay pointer-events-none z-10"></div>
                   <div class="absolute inset-0 flex flex-col items-center justify-center p-8 text-center animate-elegant-pulse" style="z-index:-1;">
                     <div class="w-px h-12 bg-gradient-to-b from-transparent via-[#134136]/30 to-transparent mb-6"></div>
                     <span class="font-primary italic text-[#134136]/60 text-xl md:text-2xl mb-4 tracking-wide">Concept Sketches</span>
-                    <span class="font-support text-[9px] uppercase tracking-[0.3em] text-[#7A7268] max-w-[80%] leading-loose opacity-70">5 Plates Requested</span>
+                    <span class="font-support text-[9px] uppercase tracking-[0.3em] text-[#7A7268] max-w-full truncate px-4 opacity-70">archive-sketch-1.jpg</span>
                   </div>
+                  <img src="/public/archive-sketch-1.jpg" alt="First Expression Sketch"
+                       class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.03] z-20"
+                       onerror="this.style.display='none'" />
                 </div>
               </div>
             </div>
@@ -310,20 +311,21 @@
           </div>
         </div>
 
-        <!-- Step 2 – Refined Design (Right) -->
+        <!-- ✅ Step 2 – Refined Design (Right) — single image -->
         <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
           <div class="md:col-span-5 md:col-start-8 space-y-6">
             <div class="fade-el" data-delay="0" data-dur="1200">
-              <div class="hover-gallery cursor-pointer group tactile-frame"
-                   data-srcs='["/public/archive-revised-1.jpg","/public/archive-revised-2.jpg","/public/archive-revised-3.jpg","/public/archive-revised-4.jpg","/public/archive-revised-5.jpg"]'
-                   data-label="5 Archival Images Requested">
-                <div class="gallery-wrap tactile-matte" style="aspect-ratio:4/5;">
-                  <div class="absolute inset-0 bg-gradient-to-br from-transparent via-[#F5FAF8]/40 to-[#134136]/5 mix-blend-overlay pointer-events-none" style="z-index:20;"></div>
+              <div class="group tactile-frame">
+                <div class="tactile-matte" style="aspect-ratio:4/5;">
+                  <div class="absolute inset-0 bg-gradient-to-br from-transparent via-[#F5FAF8]/40 to-[#134136]/5 mix-blend-overlay pointer-events-none z-10"></div>
                   <div class="absolute inset-0 flex flex-col items-center justify-center p-8 text-center animate-elegant-pulse" style="z-index:-1;">
                     <div class="w-px h-12 bg-gradient-to-b from-transparent via-[#134136]/30 to-transparent mb-6"></div>
                     <span class="font-primary italic text-[#134136]/60 text-xl md:text-2xl mb-4 tracking-wide">Refined Studies</span>
-                    <span class="font-support text-[9px] uppercase tracking-[0.3em] text-[#7A7268] max-w-[80%] leading-loose opacity-70">5 Plates Requested</span>
+                    <span class="font-support text-[9px] uppercase tracking-[0.3em] text-[#7A7268] max-w-full truncate px-4 opacity-70">archive-revised-1.jpg</span>
                   </div>
+                  <img src="/public/archive-revised-1.jpg" alt="Refined Iteration"
+                       class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.03] z-20"
+                       onerror="this.style.display='none'" />
                 </div>
               </div>
             </div>
@@ -380,7 +382,6 @@
           </div>
         </div>
         <div class="fade-el" data-delay="200" data-dur="1200">
-          <!-- ✅ FIXED: autoplay preload="auto" added -->
           <div class="group tactile-frame">
             <div class="tactile-matte" style="aspect-ratio:4/5;">
               <div class="absolute inset-0 bg-gradient-to-br from-transparent via-[#F5FAF8]/40 to-[#134136]/5 mix-blend-overlay pointer-events-none z-10"></div>
@@ -409,7 +410,6 @@
         </div>
 
         <div class="fade-el" data-delay="300" data-dur="1200">
-          <!-- ✅ FIXED: autoplay preload="auto" added -->
           <div class="w-full max-w-lg mx-auto group tactile-frame-circle">
             <div class="tactile-matte-circle" style="aspect-ratio:1/1;">
               <div class="absolute inset-0 bg-gradient-to-br from-[#F5FAF8]/60 via-transparent to-[#134136]/10 mix-blend-overlay pointer-events-none z-10"></div>
@@ -456,13 +456,10 @@
         <p class="font-body text-[#7A7268] text-sm">A deeper look into your&nbsp;piece.</p>
 
         <div id="qr-code-placeholder" class="mt-12 w-32 h-32 mx-auto bg-white border border-[#134136]/15 shadow-[0_10px_30px_-10px_rgba(19,65,54,0.15)] flex items-center justify-center p-3 rounded-[4px] cursor-pointer hover:shadow-[0_20px_40px_-15px_rgba(19,65,54,0.25)] transition-all duration-500 hover:-translate-y-1.5 relative group">
-          <!-- Corner markers for QR feel -->
           <div class="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-[#134136]/30 group-hover:border-[#134136]/80 transition-colors duration-500"></div>
           <div class="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-[#134136]/30 group-hover:border-[#134136]/80 transition-colors duration-500"></div>
           <div class="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 border-[#134136]/30 group-hover:border-[#134136]/80 transition-colors duration-500"></div>
           <div class="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 border-[#134136]/30 group-hover:border-[#134136]/80 transition-colors duration-500"></div>
-
-          <!-- Pulsing inner element indicating placeholder -->
           <div class="w-full h-full bg-[#EAF3E8]/30 border border-[#134136]/5 flex flex-col items-center justify-center animate-elegant-pulse">
             <svg class="w-6 h-6 mb-2 text-[#134136]/40" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path>
@@ -581,62 +578,7 @@
       fadeEls.forEach(function (el) { fadeObs.observe(el); });
 
 
-      // ─── 3. Hover Gallery ──────────────────────────────
-      document.querySelectorAll('.hover-gallery').forEach(function (gallery) {
-        var srcs    = JSON.parse(gallery.dataset.srcs);
-        var wrap    = gallery.querySelector('.gallery-wrap');
-        var current = 0;
-        var timer   = null;
-        var imgs    = [];
-
-        srcs.forEach(function (src, i) {
-          var img = document.createElement('img');
-          img.src = src;
-          img.alt = src;
-          img.style.cssText = [
-            'position:absolute;inset:0;',
-            'width:100%;height:100%;',
-            'object-fit:cover;',
-            'transition:opacity 1500ms ease-in-out, transform 1000ms ease-in-out;',
-            'opacity:' + (i === 0 ? '1' : '0') + ';',
-            'z-index:' + (i === 0 ? '10' : '0') + ';',
-          ].join('');
-          img.onerror = function () { this.style.display = 'none'; };
-          wrap.appendChild(img);
-          imgs.push(img);
-        });
-
-        function next() {
-          imgs[current].style.opacity = '0';
-          imgs[current].style.zIndex  = '0';
-          current = (current + 1) % imgs.length;
-          imgs[current].style.opacity = '1';
-          imgs[current].style.zIndex  = '10';
-        }
-
-        function scaleAll(s) {
-          imgs.forEach(function (img) { img.style.transform = 'scale(' + s + ')'; });
-        }
-
-        gallery.addEventListener('mouseenter', function () {
-          scaleAll(1.05);
-          timer = setInterval(next, 2000);
-        });
-
-        gallery.addEventListener('mouseleave', function () {
-          clearInterval(timer);
-          scaleAll(1);
-          imgs.forEach(function (img, i) {
-            img.style.opacity = i === 0 ? '1' : '0';
-            img.style.zIndex  = i === 0 ? '10' : '0';
-          });
-          current = 0;
-        });
-      });
-
-
-      // ─── 4. Video play-on-hover + mobile autoplay ──────
-      // ✅ FIXED: readyState check, lower threshold, canplay fallback
+      // ─── 3. Video play-on-hover + mobile autoplay ──────
       document.querySelectorAll('video[data-hover-play]').forEach(function(video) {
         var parent = video.closest('.group') || video.parentElement;
 
@@ -644,11 +586,9 @@
           video.play().catch(function(e) { console.warn('Video play blocked', e); });
         }
 
-        // Desktop: play on hover
         parent.addEventListener('mouseenter', tryPlay);
         parent.addEventListener('mouseleave', function() { video.pause(); });
 
-        // Mobile: play when scrolled into view, wait for buffer if needed
         var obs = new IntersectionObserver(function(entries) {
           entries.forEach(function(entry) {
             if (entry.isIntersecting) {
