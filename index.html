@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verne — The Oak</title>
+
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            primary: ['Cormorant', 'serif'],
+            body:    ['Lora',      'serif'],
+            support: ['Inter',     'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-warm-white: #F5FAF8;
+      --text-emerald:  #134136;
+      --bg-sage:       #EAF3E8;
+      --accent-terracotta: #C86B5E;
+      --text-taupe:    #7A7268;
+      --border-olive:  #9C9A8E;
+    }
+
+    body {
+      background-color: var(--bg-warm-white);
+      color: var(--text-emerald);
+      font-family: 'Lora', serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    .font-primary { font-family: 'Cormorant', serif; letter-spacing: -0.01em; }
+    .font-body    { font-family: 'Lora', serif;      line-height: 1.8; }
+    .font-support { font-family: 'Inter', sans-serif; letter-spacing: 0.05em; }
+
+    p              { text-wrap: pretty; }
+    h1,h2,h3,h4,h5,h6 { text-wrap: balance; }
+
+    ::selection { background-color: #EAF3E8; color: #134136; }
+
+    /* Scroll-reveal base state */
+    .fade-el {
+      opacity: 0;
+      transform: translateY(2rem);
+      filter: blur(2px);
+      transition-property: opacity, transform, filter;
+      transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .fade-el.visible {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+
+    /* Parallax leaves container — sits behind everything */
+    #parallax-leaves {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+      mix-blend-mode: multiply;
+    }
+    #parallax-leaves .leaf {
+      position: absolute;
+      top: 0;
+      color: #134136;
+      will-change: transform;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── Parallax Leaves Layer ──────────────────────────── -->
+  <div id="parallax-leaves"></div>
+
+  <main class="min-h-screen relative">
+
+    <!-- ── Navigation ───────────────────────────────────── -->
+    <nav class="absolute top-0 w-full p-8 md:p-12 flex justify-between items-start z-50">
+      <div class="fade-el" data-delay="200" data-dur="1200">
+        <h1 class="font-primary text-xl tracking-widest lowercase">verne</h1>
+      </div>
+      <div class="fade-el" data-delay="400" data-dur="1200">
+        <p class="font-support text-xs uppercase tracking-[0.2em] text-[#7A7268]">Archive of Creation</p>
+      </div>
+    </nav>
+
+    <!-- ── Hero ─────────────────────────────────────────── -->
+    <section class="h-screen flex flex-col justify-center items-center text-center px-6 relative z-10">
+      <div class="fade-el max-w-2xl mx-auto" data-delay="600" data-dur="1500">
+        <h2 class="font-primary text-5xl md:text-7xl lg:text-8xl mb-8 font-light text-[#134136] tracking-tight">
+          The Oak
+        </h2>
+      </div>
+      <div class="fade-el" data-delay="1200" data-dur="1500">
+        <div class="flex flex-col items-center space-y-4">
+          <p class="font-support text-xs uppercase tracking-[0.15em] text-[#7A7268]">Created for Wei Jiang</p>
+          <div class="w-px h-12 bg-[#134136]/30"></div>
+          <p class="font-body italic text-[#134136]/80 text-sm">April 2026</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Dedication ────────────────────────────────────── -->
+    <section class="py-32 md:py-48 px-6 bg-[#EAF3E8]/30 relative z-10">
+      <div class="max-w-xl mx-auto text-center space-y-16">
+        <div class="fade-el" data-delay="0" data-dur="1200">
+          <p class="font-support text-[10px] uppercase tracking-[0.25em] text-[#7A7268]">Dedication</p>
+        </div>
+        <div class="space-y-12 text-xl md:text-2xl font-primary text-[#134136] leading-relaxed">
+          <div class="fade-el" data-delay="200" data-dur="1200">
+            <p>This piece was created for&nbsp;you.</p>
+          </div>
+          <div class="fade-el" data-delay="400" data-dur="1200">
+            <p>A reflection of your presence,<br/>your story, your quiet strength,<br/>and the meaningful connections<br/>you carry with&nbsp;you.</p>
+          </div>
+          <div class="fade-el" data-delay="600" data-dur="1200">
+            <p>Inspired by a bond that extends<br/>beyond the piece itself, it holds a<br/>sense of love and friendship,<br/>a gesture between those who see<br/>and value&nbsp;you.</p>
+          </div>
+        </div>
+        <div class="fade-el" data-delay="800" data-dur="1200">
+          <div class="w-8 h-px bg-[#134136]/40 mx-auto my-12"></div>
+          <p class="font-body italic text-lg text-[#134136]/80 mb-6">
+            Every line, every curve, every detail<br/>was shaped with&nbsp;intention.
+          </p>
+          <p class="font-body text-base text-[#134136]/90 font-medium">
+            Not simply to be worn but to<br/>belong to&nbsp;you.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── The Origin ────────────────────────────────────── -->
+    <section class="py-32 md:py-48 px-6 max-w-5xl mx-auto relative z-10">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center">
+
+        <div class="fade-el order-2 md:order-1" data-delay="0" data-dur="1200">
+          <div class="group relative z-10">
+            <div class="relative w-full bg-[#EAF3E8] overflow-hidden flex items-center justify-center border border-[#134136]/20" style="aspect-ratio:1/1;">
+              <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-[#F5FAF8]/10 to-[#EAF3E8]/30 mix-blend-overlay pointer-events-none z-10"></div>
+              <div class="absolute inset-0 flex flex-col items-center justify-center bg-[#EAF3E8] p-8 text-center" style="z-index:-1;">
+                <div class="w-px h-8 bg-[#134136]/20 mb-4"></div>
+                <span class="font-primary italic text-[#134136]/60 text-xl mb-4">Media Pending</span>
+                <span class="font-support text-[10px] uppercase tracking-widest text-[#7A7268] max-w-full truncate px-4 opacity-70">origin-notes.jpg</span>
+              </div>
+              <img src="origin-notes.jpg" alt="Origin Notes"
+                   class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                   onerror="this.style.display='none'" />
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-8 order-1 md:order-2">
+          <div class="fade-el" data-delay="0" data-dur="1200">
+            <h3 class="font-primary text-3xl md:text-4xl">The Origin</h3>
+            <p class="font-support text-[10px] uppercase tracking-[0.2em] text-[#C86B5E] mt-4">A Gift of Meaning</p>
+          </div>
+          <div class="fade-el" data-delay="200" data-dur="1200">
+            <p class="font-body text-[#134136]/80 text-lg leading-relaxed">
+              Your friend, Jin Wang, came to Verne with the intention of creating something deeply personal, a piece that could hold meaning beyond&nbsp;form.
+            </p>
+          </div>
+          <div class="fade-el" data-delay="400" data-dur="1200">
+            <p class="font-body text-[#134136]/80 text-lg leading-relaxed">
+              Shaped by a sense of love and friendship, this creation reflects her wish to honor you, your strength, your journey, and the resilience you&nbsp;carry.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Inspiration ───────────────────────────────────── -->
+    <section class="py-32 md:py-48 px-6 bg-[#134136] text-[#F5FAF8] relative z-10">
+      <div class="max-w-4xl mx-auto text-center space-y-16">
+        <div class="fade-el" data-delay="0" data-dur="1200">
+          <h3 class="font-primary text-4xl md:text-5xl font-light">Inspiration</h3>
+          <p class="font-support text-[10px] uppercase tracking-[0.2em] text-[#EAF3E8]/60 mt-6">Where It Began</p>
+        </div>
+        <div class="fade-el" data-delay="200" data-dur="1200">
+          <p class="font-primary italic text-2xl md:text-3xl leading-relaxed text-[#EAF3E8]">
+            &ldquo;The design draws from the oak,<br/>a symbol of resilience rooted beneath the&nbsp;surface.&rdquo;
+          </p>
+        </div>
+        <div class="fade-el max-w-2xl mx-auto" data-delay="400" data-dur="1200">
+          <p class="font-body text-sm md:text-base leading-loose text-[#F5FAF8]/80">
+            Like the roots of a tree, true strength is not always seen, yet it is what allows everything else to stand. In this piece, the oak is not used as decoration, but as a guiding structure, a reflection of balance, steadiness, and the kind of strength that does not need to announce&nbsp;itself.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Design Development ────────────────────────────── -->
+    <section class="py-16 md:py-24 px-6 max-w-6xl mx-auto relative z-10">
+      <div class="fade-el text-center mb-12 md:mb-16" data-delay="0" data-dur="1200">
+        <p class="font-support text-[10px] uppercase tracking-[0.25em] text-[#7A7268]">The Archive</p>
+        <h3 class="font-primary text-3xl md:text-4xl mt-4">Design Development</h3>
+      </div>
+
+      <div class="space-y-12 md:space-y-16">
+
+        <!-- Step 1 – Sketch (Left) -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
+          <div class="md:col-span-5 space-y-6">
+            <div class="fade-el" data-delay="0" data-dur="1200">
+              <div class="hover-gallery cursor-pointer relative z-10"
+                   data-srcs='["archive-sketch-1.jpg","archive-sketch-2.jpg","archive-sketch-3.jpg","archive-sketch-4.jpg","archive-sketch-5.jpg"]'
+                   data-label="5 Archival Images Requested">
+                <div class="gallery-wrap relative w-full bg-[#EAF3E8] overflow-hidden flex items-center justify-center border border-[#134136]/20" style="aspect-ratio:3/4;">
+                  <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-[#F5FAF8]/10 to-[#EAF3E8]/30 mix-blend-overlay pointer-events-none" style="z-index:20;"></div>
+                  <div class="absolute inset-0 flex flex-col items-center justify-center bg-[#EAF3E8] p-8 text-center" style="z-index:-1;">
+                    <div class="w-px h-8 bg-[#134136]/20 mb-4"></div>
+                    <span class="font-primary italic text-[#134136]/60 text-xl mb-4">Hover Gallery Pending</span>
+                    <span class="font-support text-[9px] uppercase tracking-widest text-[#7A7268] max-w-[80%] leading-loose opacity-70">5 Archival Images Requested</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="fade-el px-4" data-delay="200" data-dur="1200">
+              <h4 class="font-primary text-xl mb-2">First Expression</h4>
+              <p class="font-body text-sm text-[#134136]/70">Each line drawn by hand to understand form before structure. An exploration of&nbsp;balance.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 – Refined Design (Right) -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
+          <div class="md:col-span-5 md:col-start-8 space-y-6">
+            <div class="fade-el" data-delay="0" data-dur="1200">
+              <div class="hover-gallery cursor-pointer relative z-10"
+                   data-srcs='["archive-revised-1.jpg","archive-revised-2.jpg","archive-revised-3.jpg","archive-revised-4.jpg","archive-revised-5.jpg"]'
+                   data-label="5 Archival Images Requested">
+                <div class="gallery-wrap relative w-full bg-[#EAF3E8] overflow-hidden flex items-center justify-center border border-[#134136]/20" style="aspect-ratio:3/4;">
+                  <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-[#F5FAF8]/10 to-[#EAF3E8]/30 mix-blend-overlay pointer-events-none" style="z-index:20;"></div>
+                  <div class="absolute inset-0 flex flex-col items-center justify-center bg-[#EAF3E8] p-8 text-center" style="z-index:-1;">
+                    <div class="w-px h-8 bg-[#134136]/20 mb-4"></div>
+                    <span class="font-primary italic text-[#134136]/60 text-xl mb-4">Hover Gallery Pending</span>
+                    <span class="font-support text-[9px] uppercase tracking-widest text-[#7A7268] max-w-[80%] leading-loose opacity-70">5 Archival Images Requested</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="fade-el px-4" data-delay="200" data-dur="1200">
+              <h4 class="font-primary text-xl mb-2">Refined Iteration</h4>
+              <p class="font-body text-sm text-[#134136]/70">A deeper translation of the initial concept. Details are sculpted, bringing the organic flow closer to&nbsp;reality.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 – CAD (Center) -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
+          <div class="md:col-span-6 md:col-start-4 space-y-6">
+            <div class="fade-el" data-delay="0" data-dur="1200">
+              <div class="group relative z-10">
+                <div class="relative w-full bg-[#EAF3E8] overflow-hidden flex items-center justify-center border border-[#134136]/20" style="aspect-ratio:1/1;">
+                  <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-[#F5FAF8]/10 to-[#EAF3E8]/30 mix-blend-overlay pointer-events-none z-10"></div>
+                  <div class="absolute inset-0 flex flex-col items-center justify-center bg-[#EAF3E8] p-8 text-center" style="z-index:-1;">
+                    <div class="w-px h-8 bg-[#134136]/20 mb-4"></div>
+                    <span class="font-primary italic text-[#134136]/60 text-xl mb-4">Media Pending</span>
+                    <span class="font-support text-[10px] uppercase tracking-widest text-[#7A7268] max-w-full truncate px-4 opacity-70">archive-cad.jpg</span>
+                  </div>
+                  <img src="archive-cad.jpg" alt="CAD Design"
+                       class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                       onerror="this.style.display='none'" />
+                </div>
+              </div>
+            </div>
+            <div class="fade-el px-4 text-center" data-delay="200" data-dur="1200">
+              <h4 class="font-primary text-xl mb-2">Structure &amp; Intent</h4>
+              <p class="font-body text-sm text-[#134136]/70 max-w-sm mx-auto">Through digital modeling, every measurement becomes intentional. Every angle&nbsp;considered.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── The Making ────────────────────────────────────── -->
+    <section class="py-32 px-6 relative z-10">
+      <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+        <div class="space-y-8 pr-0 md:pr-12">
+          <div class="fade-el" data-delay="0" data-dur="1200">
+            <h3 class="font-primary text-3xl md:text-4xl">The Making</h3>
+            <p class="font-support text-[10px] uppercase tracking-[0.2em] text-[#7A7268] mt-4">At Our Atelier</p>
+          </div>
+          <div class="fade-el" data-delay="200" data-dur="1200">
+            <p class="font-body text-[#134136]/80 leading-relaxed">
+              Crafted by skilled artisans whose work is guided by experience and discipline. Each step carried out by hand, shaping, setting,&nbsp;refining.
+            </p>
+          </div>
+          <div class="fade-el" data-delay="400" data-dur="1200">
+            <p class="font-body text-[#134136]/80 leading-relaxed italic">A process that cannot be&nbsp;rushed.</p>
+          </div>
+        </div>
+        <div class="fade-el" data-delay="200" data-dur="1200">
+          <div class="group relative z-10">
+            <div class="relative w-full bg-[#EAF3E8] overflow-hidden flex items-center justify-center border border-[#134136]/20" style="aspect-ratio:4/5;">
+              <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-[#F5FAF8]/10 to-[#EAF3E8]/30 mix-blend-overlay pointer-events-none z-10"></div>
+              <div class="absolute inset-0 flex flex-col items-center justify-center bg-[#EAF3E8] p-8 text-center" style="z-index:-1;">
+                <div class="w-px h-8 bg-[#134136]/20 mb-4"></div>
+                <span class="font-primary italic text-[#134136]/60 text-xl mb-4">Media Pending</span>
+                <span class="font-support text-[10px] uppercase tracking-widest text-[#7A7268] max-w-full truncate px-4 opacity-70">making-macro.mp4</span>
+              </div>
+              <video src="making-macro.mp4"
+                     class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                     muted loop playsinline
+                     onerror="this.style.display='none'"
+                     data-hover-play></video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── The Final Piece ───────────────────────────────── -->
+    <section class="py-32 md:py-48 px-6 bg-[#EAF3E8]/50 text-center relative z-10">
+      <div class="max-w-3xl mx-auto space-y-16">
+        <div class="fade-el" data-delay="0" data-dur="1200">
+          <h3 class="font-primary text-4xl md:text-5xl">The Final Piece</h3>
+          <p class="font-support text-[10px] uppercase tracking-[0.2em] text-[#7A7268] mt-6">It Comes to Life</p>
+        </div>
+
+        <div class="fade-el" data-delay="300" data-dur="1200">
+          <div class="w-full max-w-lg mx-auto rounded-full overflow-hidden flex items-center justify-center bg-[#F5FAF8] border border-[#134136]/5 relative group"
+               style="aspect-ratio:1/1; box-shadow:inset 0 0 40px rgba(19,65,54,0.05);">
+            <div class="absolute inset-0 flex flex-col items-center justify-center bg-[#F5FAF8] text-center px-8" style="z-index:-1;">
+              <div class="w-px h-6 bg-[#134136]/20 mb-3"></div>
+              <span class="font-primary italic text-[#134136]/60 text-lg mb-2">Final Piece Pending</span>
+            </div>
+            <video src="final-piece.mp4"
+                   class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                   muted loop playsinline
+                   onerror="this.style.display='none'"
+                   data-hover-play></video>
+          </div>
+          <p class="font-primary italic text-[#134136]/60 text-center text-lg px-8 mt-8">
+            Skin contact. The piece resting elegantly, light catching the birthstone and engraved diamond&nbsp;vines.
+          </p>
+        </div>
+
+        <div class="fade-el space-y-6 pt-8" data-delay="600" data-dur="1200">
+          <p class="font-body text-xl text-[#134136]">The moment where intention becomes&nbsp;form.</p>
+          <p class="font-support text-sm uppercase tracking-widest text-[#7A7268]">Balanced. Refined.&nbsp;Complete.</p>
+        </div>
+
+        <div class="fade-el" data-delay="900" data-dur="1200">
+          <p class="font-primary text-2xl md:text-3xl italic text-[#134136] leading-relaxed max-w-xl mx-auto">
+            What began with love now lives on in&nbsp;form.
+          </p>
+        </div>
+
+        <div class="fade-el" data-delay="1200" data-dur="1200">
+          <p class="font-body text-sm md:text-base text-[#134136]/80 leading-loose max-w-2xl mx-auto">
+            May it move with you through time, holding the meaning for which it was created, and quietly gathering new meaning along the&nbsp;way.
+          </p>
+          <p class="font-primary text-xl mt-8">With love, from Jin&nbsp;Wang.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Footer ────────────────────────────────────────── -->
+    <footer class="py-24 text-center px-6 relative z-10">
+      <div class="fade-el" data-delay="0" data-dur="1200">
+        <p class="font-primary text-2xl text-[#134136] mb-4">The Archive Continues</p>
+        <p class="font-body text-[#7A7268] text-sm">A deeper look into your&nbsp;piece.</p>
+        <div class="mt-12 w-16 h-16 mx-auto border border-[#134136]/20 flex items-center justify-center p-2 rounded-sm cursor-pointer hover:bg-[#EAF3E8] transition-colors duration-500">
+          <div class="w-full h-full border border-[#134136]/10 flex items-center justify-center">
+            <span class="font-support text-[8px] uppercase tracking-widest text-[#134136]/50 text-center leading-tight">Scan<br/>To<br/>Explore</span>
+          </div>
+        </div>
+        <p class="font-primary text-lg tracking-widest lowercase text-[#134136]/40 mt-16">verne</p>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- ── JavaScript ─────────────────────────────────────── -->
+  <script>
+  (function () {
+
+    // ── Utility: seeded pseudo-random so leaves are stable on re-render ──
+    // (We use Math.random() once on load and freeze the values, same as useMemo)
+
+    // ─── 1. Parallax Leaves ──────────────────────────────
+    (function initLeaves() {
+      var container = document.getElementById('parallax-leaves');
+      var wh = window.innerHeight;
+      var scrollY = 0;
+      var rafId = null;
+
+      // Oak leaf SVG path (identical to the React source)
+      var OAK_PATH = 'M17.41 18c-.6 1.9-2.3 3.2-4.3 3.5V23.5h-2V21.5c-2-.3-3.7-1.6-4.3-3.5-.5-1.7.2-3.5 1.7-4.4-1.2-1.1-1.6-2.8-1-4.3.5-1.5 2-2.5 3.6-2.6C10.7 5.1 10.3 3.3 11 1.8c.7-1.5 2.3-2.2 3.8-1.7 1.5.5 2.2 2.1 1.7 3.6-.3.8-.9 1.4-1.6 1.8 1.5.1 2.8 1.2 3.3 2.6.5 1.4.1 3-.9 4.1 1.3.9 2 2.6 1.6 4.2-.4 1.6-2.1 2.7-3.8 2.6z';
+
+      // Build 12 leaf data objects (mirrors useMemo array)
+      var leaves = Array.from({ length: 12 }).map(function (_, i) {
+        return {
+          left:       Math.random() * 100,
+          scale:      0.8 + Math.random() * 2.5,
+          speed:      0.15 + Math.random() * 0.35,
+          rotSpeed:   (Math.random() - 0.5) * 0.1,
+          initialRot: Math.random() * 360,
+          opacity:    0.02 + Math.random() * 0.03,
+          blur:       Math.random() > 0.5 ? 'blur(4px)' : 'blur(8px)',
+          offsetY:    Math.random() * 5000,
+          swaySpeed:  0.001 + Math.random() * 0.003,
+          swayAmount: 40 + Math.random() * 80,
+        };
+      });
+
+      // Create a DOM element for each leaf
+      var leafEls = leaves.map(function (l) {
+        var wrap = document.createElement('div');
+        wrap.className = 'leaf';
+        wrap.style.left    = l.left + '%';
+        wrap.style.opacity = l.opacity;
+        wrap.style.filter  = l.blur;
+        wrap.style.color   = '#134136';
+
+        var ns  = 'http://www.w3.org/2000/svg';
+        var svg = document.createElementNS(ns, 'svg');
+        svg.setAttribute('viewBox', '0 0 24 24');
+        svg.setAttribute('fill', 'currentColor');
+        svg.style.width  = '6rem';   // w-24
+        svg.style.height = '6rem';   // h-24
+
+        var path = document.createElementNS(ns, 'path');
+        path.setAttribute('d', OAK_PATH);
+        svg.appendChild(path);
+        wrap.appendChild(svg);
+        container.appendChild(wrap);
+        return wrap;
+      });
+
+      // rAF loop — mirrors the React scroll math exactly
+      function tick() {
+        var buffer      = 400;
+        var cycleHeight = wh + buffer * 2;
+
+        leaves.forEach(function (l, i) {
+          var absoluteY = (scrollY * l.speed) + l.offsetY;
+          var y = ((absoluteY % cycleHeight) + cycleHeight) % cycleHeight - buffer;
+          var x = Math.sin(scrollY * l.swaySpeed + l.initialRot) * l.swayAmount;
+          var rot = l.initialRot + scrollY * l.rotSpeed;
+
+          leafEls[i].style.transform =
+            'translate3d(' + x + 'px, ' + y + 'px, 0) ' +
+            'rotate(' + rot + 'deg) ' +
+            'scale(' + l.scale + ')';
+        });
+
+        rafId = requestAnimationFrame(tick);
+      }
+
+      // Passive scroll listener
+      window.addEventListener('scroll', function () {
+        scrollY = window.scrollY;
+      }, { passive: true });
+
+      window.addEventListener('resize', function () {
+        wh = window.innerHeight;
+      });
+
+      // Kick off the loop
+      rafId = requestAnimationFrame(tick);
+    })();
+
+
+    // ─── 2. Scroll-reveal (FadeIn) ───────────────────────
+    document.addEventListener('DOMContentLoaded', function () {
+
+      var fadeEls = document.querySelectorAll('.fade-el');
+      var fadeObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var el  = entry.target;
+          var dur = parseInt(el.dataset.dur   || 1200);
+          var del = parseInt(el.dataset.delay || 0);
+          el.style.transitionDuration = dur + 'ms';
+          el.style.transitionDelay    = del + 'ms';
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () { el.classList.add('visible'); });
+          });
+          fadeObs.unobserve(el);
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+      fadeEls.forEach(function (el) { fadeObs.observe(el); });
+
+
+      // ─── 3. Hover Gallery ──────────────────────────────
+      document.querySelectorAll('.hover-gallery').forEach(function (gallery) {
+        var srcs    = JSON.parse(gallery.dataset.srcs);
+        var wrap    = gallery.querySelector('.gallery-wrap');
+        var current = 0;
+        var timer   = null;
+        var imgs    = [];
+
+        srcs.forEach(function (src, i) {
+          var img = document.createElement('img');
+          img.src = src;
+          img.alt = src;
+          img.style.cssText = [
+            'position:absolute;inset:0;',
+            'width:100%;height:100%;',
+            'object-fit:cover;',
+            'transition:opacity 1500ms ease-in-out, transform 1000ms ease-in-out;',
+            'opacity:' + (i === 0 ? '1' : '0') + ';',
+            'z-index:' + (i === 0 ? '10' : '0') + ';',
+          ].join('');
+          img.onerror = function () { this.style.display = 'none'; };
+          wrap.appendChild(img);
+          imgs.push(img);
+        });
+
+        function next() {
+          imgs[current].style.opacity = '0';
+          imgs[current].style.zIndex  = '0';
+          current = (current + 1) % imgs.length;
+          imgs[current].style.opacity = '1';
+          imgs[current].style.zIndex  = '10';
+        }
+
+        function scaleAll(s) {
+          imgs.forEach(function (img) { img.style.transform = 'scale(' + s + ')'; });
+        }
+
+        gallery.addEventListener('mouseenter', function () {
+          scaleAll(1.05);
+          timer = setInterval(next, 2000);
+        });
+
+        gallery.addEventListener('mouseleave', function () {
+          clearInterval(timer);
+          scaleAll(1);
+          imgs.forEach(function (img, i) {
+            img.style.opacity = i === 0 ? '1' : '0';
+            img.style.zIndex  = i === 0 ? '10' : '0';
+          });
+          current = 0;
+        });
+      });
+
+
+      // ─── 4. Video play-on-hover ────────────────────────
+      document.querySelectorAll('video[data-hover-play]').forEach(function (video) {
+        var parent = video.closest('.group') || video.parentElement;
+        parent.addEventListener('mouseenter', function () {
+          var p = video.play();
+          if (p) p.catch(function (e) { console.warn('Video play blocked:', e); });
+        });
+        parent.addEventListener('mouseleave', function () { video.pause(); });
+      });
+
+    });
+
+  })();
+  </script>
+</body>
+</html>
